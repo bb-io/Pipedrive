@@ -1,6 +1,5 @@
-﻿namespace Apps.Pipedrive.Models.Response.Deal;
+﻿using Apps.Pipedrive.Models.Dto;
 
-public class ListDealsResponse
-{
-    
-}
+namespace Apps.Pipedrive.Models.Response.Deal;
+
+public record ListDealsResponse(DealDto[] Deals);

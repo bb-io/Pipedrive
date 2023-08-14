@@ -1,6 +1,12 @@
-﻿namespace Apps.Pipedrive;
+﻿using Blackbird.Applications.Sdk.Utils.Sdk.Applications;
 
-public class PipedriveApplication
+namespace Apps.Pipedrive;
+
+public class PipedriveApplication : BlackBirdTokenApplication
 {
-    
+    public override string Name
+    {
+        get => "Pipedrive";
+        set { }
+    }
 }

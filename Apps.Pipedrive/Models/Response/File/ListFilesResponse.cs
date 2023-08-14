@@ -1,6 +1,5 @@
-﻿namespace Apps.Pipedrive.Models.Response.File;
+﻿using Apps.Pipedrive.Models.Dto;
 
-public class ListFilesResponse
-{
-    
-}
+namespace Apps.Pipedrive.Models.Response.File;
+
+public record ListFilesResponse(FileDto[] Files);

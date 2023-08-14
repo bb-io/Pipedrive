@@ -1,14 +1,18 @@
-﻿using Blackbird.Applications.Sdk.Common;
+﻿using Apps.Pipedrive.DataSourceHandlers;
+using Apps.Pipedrive.DataSourceHandlers.EnumDataHandlers;
+using Blackbird.Applications.Sdk.Common;
+using Blackbird.Applications.Sdk.Common.Dynamic;
 
 namespace Apps.Pipedrive.Models.Request.Activity;
 
-public class MnageActivityRequest
+public class ManageActivityRequest
 {
     public string? Subject { get; set; }
 
     [Display("Is done")]
     public bool? IsDone { get; set; }
-
+    
+    [DataSource(typeof(ActivityTypeDataHandler))]
     public string? Type { get; set; }
 
     [Display("Due date")]
@@ -19,19 +23,23 @@ public class MnageActivityRequest
 
     public string? Duration { get; set; }
 
-    [Display("User ID")]
+    [Display("User")]
+    [DataSource(typeof(UserDataHandler))]
     public string? UserId { get; set; }
 
-    [Display("Deal ID")]
+    [Display("Deal")]
+    [DataSource(typeof(DealDataHandler))]
     public string? DealId { get; set; }
 
-    [Display("Person ID")]
+    [Display("Person")]
+    [DataSource(typeof(PersonDataHandler))]
     public string? PersonId { get; set; }
 
     [Display("Participant IDs")]
-    public IEnumerable<string> Participants { get; set; }
+    public IEnumerable<string>? Participants { get; set; }
 
-    [Display("Organization ID")]
+    [Display("Organization")]
+    [DataSource(typeof(OrganizationDataHandler))]
     public string? OrganizationId { get; set; }
 
     public string? Note { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace Apps.Pipedrive.Constants;
 
-public class EnumValues
+public static class EnumValues
 {
-    
+    public static readonly string[] DealStauts = { "open", "won", "lost", "deleted"};
 }

@@ -1,8 +1,10 @@
-﻿using Blackbird.Applications.Sdk.Common;
+﻿using Apps.Pipedrive.DataSourceHandlers;
+using Blackbird.Applications.Sdk.Common;
+using Blackbird.Applications.Sdk.Common.Dynamic;
 
 namespace Apps.Pipedrive.Models.Request.Deal;
 
-public class CreateDealRequest
+public class ManageDealRequest
 {
     [Display("Title")]
     public string Title { get; set; }
@@ -14,16 +16,20 @@ public class CreateDealRequest
     [Display("Currency")]
     public string? Currency { get; set; }
 
-    [Display("User ID")]
+    [Display("User")]
+    [DataSource(typeof(UserDataHandler))]
     public string? UserId { get; set; }
 
-    [Display("Person ID")]
+    [Display("Person")]
+    [DataSource(typeof(PersonDataHandler))]
     public string? PersonId { get; set; }
 
-    [Display("Organization ID")]
+    [Display("Organization")]
+    [DataSource(typeof(OrganizationDataHandler))]
     public string? OrgId { get; set; }
 
-    [Display("Stage ID")]
+    [Display("Stage")]
+    [DataSource(typeof(StageDataHandler))]
     public string? StageId { get; set; }
 
     [Display("Status")]
