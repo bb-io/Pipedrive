@@ -1,10 +1,15 @@
-﻿using Blackbird.Applications.Sdk.Utils.Sdk.Applications;
+﻿using Blackbird.Applications.Sdk.Common;
 
 namespace Apps.Pipedrive;
 
-public class PipedriveApplication : BlackBirdTokenApplication
+public class PipedriveApplication : IApplication
 {
-    public override string Name
+    public T GetInstance<T>()
+    {
+        throw new NotImplementedException();
+    }
+
+    public string Name
     {
         get => "Pipedrive";
         set { }
