@@ -49,16 +49,25 @@ public class PersonDto
 
     public PersonDto(Person person)
     {
+        var emails = person.Email
+            .Where(x => !string.IsNullOrEmpty(x.Value))
+            .Select(x => x.Value)
+            .ToArray();
+        var phones = person.Phone
+            .Where(x => !string.IsNullOrEmpty(x.Value))
+            .Select(x => x.Value)
+            .ToArray();
+        
         Id = person.Id.ToString();
         FirstName = person.FirstName;
         LastName = person.LastName;
         Name = person.Name;
         CompanyId = person.CompanyId.ToString();
-        Emails = person.Email.Select(x => x.Value);
-        Phones = person.Phone.Select(x => x.Value);
+        Emails = emails.Any() ? emails : default;
+        Phones = phones.Any() ? phones : default;
         AddTime = person.AddTime;
-        OrgId = person.OrgId.ToString();
-        OwnerId = person.OwnerId.ToString();
+        OrgId = person.OrgId?.Value.ToString();
+        OwnerId = person.OwnerId.Value.ToString();
         IsPrivate = person.VisibleTo == Visibility.@private;
     }
 }

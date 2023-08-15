@@ -7,6 +7,7 @@ using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
+using Newtonsoft.Json.Serialization;
 using Pipedrive;
 using RestSharp;
 
@@ -35,7 +36,7 @@ public class NoteCommentActions
     public async Task<NoteCommentDto> GetNoteComment(
         IEnumerable<AuthenticationCredentialsProvider> creds,
         [ActionParameter] NoteRequest note,
-        [ActionParameter] [Display("Comment ID")]
+        [ActionParameter] [Display("Comment UUID")]
         string commentId)
     {
         var client = new PipedriveRestClient(creds);
@@ -44,6 +45,8 @@ public class NoteCommentActions
         var request = new PipedriveRestRequest(endpoint, Method.Get, creds);
 
         var response = await client.ExecuteWithErrorHandling<JsonResponse<NoteCommentResponse>>(request);
+        response.Data.Uuid = commentId;
+        
         return new(response.Data);
     }
 
@@ -57,7 +60,13 @@ public class NoteCommentActions
 
         var endpoint = $"/v1/notes/{note.NoteId}/comments";
         var request = new PipedriveRestRequest(endpoint, Method.Post, creds)
-            .WithJsonBody(input);
+            .WithJsonBody(input, new()
+            {
+                ContractResolver = new DefaultContractResolver
+                {
+                    NamingStrategy = new SnakeCaseNamingStrategy()
+                }
+            });
 
         var response = await client.ExecuteWithErrorHandling<JsonResponse<NoteCommentResponse>>(request);
         return new(response.Data);
@@ -67,14 +76,21 @@ public class NoteCommentActions
     public async Task<NoteCommentDto> UpdateNoteComment(
         IEnumerable<AuthenticationCredentialsProvider> creds,
         [ActionParameter] NoteRequest note,
-        [ActionParameter] [Display("Comment ID")] string commentId,
+        [ActionParameter] [Display("Comment UUID")]
+        string commentId,
         [ActionParameter] AddNoteCommentRequest input)
     {
         var client = new PipedriveRestClient(creds);
 
         var endpoint = $"/v1/notes/{note.NoteId}/comments/{commentId}";
         var request = new PipedriveRestRequest(endpoint, Method.Put, creds)
-            .WithJsonBody(input);
+            .WithJsonBody(input, new()
+            {
+                ContractResolver = new DefaultContractResolver
+                {
+                    NamingStrategy = new SnakeCaseNamingStrategy()
+                }
+            });
 
         var response = await client.ExecuteWithErrorHandling<JsonResponse<NoteCommentResponse>>(request);
         return new(response.Data);
@@ -84,7 +100,8 @@ public class NoteCommentActions
     public Task DeleteNoteComment(
         IEnumerable<AuthenticationCredentialsProvider> creds,
         [ActionParameter] NoteRequest note,
-        [ActionParameter] [Display("Comment ID")] string commentId)
+        [ActionParameter] [Display("Comment UUID")]
+        string commentId)
     {
         var client = new PipedriveRestClient(creds);
 

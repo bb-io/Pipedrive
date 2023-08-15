@@ -23,10 +23,6 @@ public class ActivityWebhookList : BaseInvocable
     public Task<WebhookResponse<ActivityDto>> OnActivityDeleted(WebhookRequest webhookRequest)
         => HandleWebhookRequest(webhookRequest);
 
-    [Webhook("On activity merged", typeof(ActivityMergedHandler), Description = "On specific activity merged")]
-    public Task<WebhookResponse<ActivityDto>> OnActivityMerged(WebhookRequest webhookRequest)
-        => HandleWebhookRequest(webhookRequest);
-
     [Webhook("On activity updated", typeof(ActivityUpdatedHandler), Description = "On specific activity updated")]
     public Task<WebhookResponse<ActivityDto>> OnActivityUpdated(WebhookRequest webhookRequest)
         => HandleWebhookRequest(webhookRequest);

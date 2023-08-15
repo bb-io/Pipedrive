@@ -16,11 +16,7 @@ public class NoteWebhookList : WebhookList
     [Webhook("On note deleted", typeof(NoteDeletedHandler), Description = "On specific note deleted")]
     public Task<WebhookResponse<NoteDto>> OnNoteDeleted(WebhookRequest webhookRequest)
         => HandleWebhookRequest<Note, NoteDto>(webhookRequest, x => new(x));
-
-    [Webhook("On note merged", typeof(NoteMergedHandler), Description = "On specific note merged")]
-    public Task<WebhookResponse<NoteDto>> OnNoteMerged(WebhookRequest webhookRequest)
-        => HandleWebhookRequest<Note, NoteDto>(webhookRequest, x => new(x));
-
+    
     [Webhook("On note updated", typeof(NoteUpdatedHandler), Description = "On specific note updated")]
     public Task<WebhookResponse<NoteDto>> OnNoteUpdated(WebhookRequest webhookRequest)
         => HandleWebhookRequest<Note, NoteDto>(webhookRequest, x => new(x));

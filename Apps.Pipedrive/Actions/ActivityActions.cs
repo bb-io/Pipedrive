@@ -48,18 +48,21 @@ public class ActivityActions
         var client = new PipedriveApiClient(creds);
 
         var intUserId = LongParser.Parse(user.UserId, nameof(user.UserId))!.Value;
-        var response = await client.Activity.GetAllForUserId(intUserId, new()
-        {
-            Type = input.Type,
-            StartDate = input.StartDate,
-            EndDate = input.EndDate,
-            Done = input.IsActivityDone switch
+        var response = await client.Paginate((lim, offset) =>
+            client.Activity.GetAllForUserId(intUserId, new()
             {
-                true => ActivityDone.Done,
-                false => ActivityDone.Undone,
-                _ => null
-            }
-        });
+                Type = input.Type,
+                StartDate = input.StartDate,
+                EndDate = input.EndDate,
+                PageSize = lim,
+                StartPage = offset,
+                Done = input.IsActivityDone switch
+                {
+                    true => ActivityDone.Done,
+                    false => ActivityDone.Undone,
+                    _ => null
+                }
+            }));
 
         var activities = response.Select(x => new ActivityDto(x)).ToArray();
         return new(activities);
@@ -119,7 +122,7 @@ public class ActivityActions
                 UserId = LongParser.Parse(input.UserId, nameof(input.UserId)),
                 DealId = LongParser.Parse(input.DealId, nameof(input.DealId)),
                 PersonId = LongParser.Parse(input.PersonId, nameof(input.PersonId)),
-                Participants = input.Participants.Select(x => new Participant
+                Participants = input.Participants?.Select(x => new Participant
                 {
                     PersonId = LongParser.Parse(x, nameof(input.PersonId)) ?? throw new("One participant IDs is null")
                 }).ToList(),

@@ -53,7 +53,7 @@ public class FileActions
         var request = new PipedriveRestRequest(endpoint, Method.Get, creds);
 
         var response = await client.ExecuteWithErrorHandling(request);
-        return new(response.RawBytes!);
+        return new(response.RawBytes);
     }
 
     [Action("Add file", Description = "Upload a new file")]

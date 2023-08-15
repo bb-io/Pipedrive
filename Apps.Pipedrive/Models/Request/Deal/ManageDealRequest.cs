@@ -8,12 +8,17 @@ public class ManageDealRequest
 {
     [Display("Title")]
     public string Title { get; set; }
+    
+    [Display("Stage")]
+    [DataSource(typeof(StageDataHandler))]
+    public string StageId { get; set; }
 
     // TODO: Check if decimal works with the sdk
     [Display("Value")]
     public decimal Value { get; set; }
 
     [Display("Currency")]
+    [DataSource(typeof(CurrencyDataHandler))]
     public string? Currency { get; set; }
 
     [Display("User")]
@@ -27,10 +32,6 @@ public class ManageDealRequest
     [Display("Organization")]
     [DataSource(typeof(OrganizationDataHandler))]
     public string? OrgId { get; set; }
-
-    [Display("Stage")]
-    [DataSource(typeof(StageDataHandler))]
-    public string? StageId { get; set; }
 
     [Display("Status")]
     public string? Status { get; set; }

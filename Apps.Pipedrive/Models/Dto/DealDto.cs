@@ -49,9 +49,9 @@ public class DealDto
         Title = deal.Title;
         Value = deal.Value;
         Currency = deal.Currency;
-        UserId = deal.UserId.ToString();
-        PersonId = deal.PersonId.ToString();
-        OrgId = deal.OrgId.ToString();
+        UserId = deal.UserId.Value.ToString();
+        PersonId = deal.PersonId?.Value.ToString();
+        OrgId = deal.OrgId?.Value.ToString();
         StageId = deal.StageId.ToString();
         Status = deal.Status.ToString();
         Probability = deal.Probability;

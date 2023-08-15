@@ -16,11 +16,7 @@ public class PipelineWebhookList : WebhookList
     [Webhook("On pipeline deleted", typeof(PipelineDeletedHandler), Description = "On specific pipeline deleted")]
     public Task<WebhookResponse<PipelineDto>> OnPipelineDeleted(WebhookRequest webhookRequest)
         => HandleWebhookRequest<Pipeline, PipelineDto>(webhookRequest, x => new(x));
-
-    [Webhook("On pipeline merged", typeof(PipelineMergedHandler), Description = "On specific pipeline merged")]
-    public Task<WebhookResponse<PipelineDto>> OnPipelineMerged(WebhookRequest webhookRequest)
-        => HandleWebhookRequest<Pipeline, PipelineDto>(webhookRequest, x => new(x));
-
+    
     [Webhook("On pipeline updated", typeof(PipelineUpdatedHandler), Description = "On specific pipeline updated")]
     public Task<WebhookResponse<PipelineDto>> OnPipelineUpdated(WebhookRequest webhookRequest)
         => HandleWebhookRequest<Pipeline, PipelineDto>(webhookRequest, x => new(x));

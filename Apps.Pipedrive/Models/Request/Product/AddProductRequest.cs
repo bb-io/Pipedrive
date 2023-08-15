@@ -7,6 +7,11 @@ namespace Apps.Pipedrive.Models.Request.Product;
 public class AddProductRequest
 {
     public string Name { get; set; }
+    
+    public decimal Price { get; set; }
+    
+    [DataSource(typeof(CurrencyDataHandler))]
+    public string Currency { get; set; }
 
     public string? Code { get; set; }
 

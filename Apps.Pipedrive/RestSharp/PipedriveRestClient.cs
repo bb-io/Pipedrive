@@ -3,9 +3,9 @@ using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using Blackbird.Applications.Sdk.Utils.Extensions.String;
 using Blackbird.Applications.Sdk.Utils.RestSharp;
+using Newtonsoft.Json;
 using Pipedrive;
 using RestSharp;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Apps.Pipedrive.RestSharp;
 
@@ -18,7 +18,8 @@ public class PipedriveRestClient : BlackBirdRestClient
 
     protected override Exception ConfigureErrorException(RestResponse response)
     {
-        throw new NotImplementedException();
+        var error = JsonConvert.DeserializeObject<ApiError>(response.Content);
+        return new(error.Error);
     }
 
     private static RestClientOptions GetClientOptions(IEnumerable<AuthenticationCredentialsProvider> creds)
@@ -45,7 +46,9 @@ public class PipedriveRestClient : BlackBirdRestClient
             });
 
             response = await ExecuteWithErrorHandling<JsonResponse<T[]>>(request);
-            result.AddRange(response.Data);
+            
+            if(response.Data is not null)
+                result.AddRange(response.Data);
 
             start += limit;
         } while (response.AdditionalData.Pagination.MoreItemsInCollection);

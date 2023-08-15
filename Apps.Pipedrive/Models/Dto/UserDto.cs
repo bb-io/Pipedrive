@@ -13,6 +13,8 @@ public class UserDto
     public string Phone { get; set; }
     [Display("Created at")] public DateTime CreatedAt { get; set; }
     [Display("Role ID")] public string RoleId { get; set; }
+    
+    [Display("Is active")] public bool IsActive { get; set; }
 
     public UserDto(User user)
     {
@@ -24,5 +26,6 @@ public class UserDto
         Phone = user.Phone;
         CreatedAt = user.Created;
         RoleId = user.RoleId.ToString();
+        IsActive = user.ActiveFlag;
     }
 }

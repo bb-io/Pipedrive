@@ -2,10 +2,15 @@
 using Apps.Pipedrive.Models.Dto;
 using Apps.Pipedrive.Models.Request.Note;
 using Apps.Pipedrive.Models.Response.Note;
+using Apps.Pipedrive.RestSharp;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Authentication;
+using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 using Blackbird.Applications.Sdk.Utils.Parsers;
+using Newtonsoft.Json;
+using Pipedrive;
+using RestSharp;
 
 namespace Apps.Pipedrive.Actions;
 
@@ -72,9 +77,9 @@ public class NoteActions
         [ActionParameter] NoteRequest note,
         [ActionParameter] UpdateNoteRequest input)
     {
-        var client = new PipedriveApiClient(creds);
-        
-        var response = await client.Note.Edit(long.Parse(note.NoteId),new()
+        var client = new PipedriveRestClient(creds);
+
+        var payload = new NoteUpdate()
         {
             Content = input.Content,
             DealId = LongParser.Parse(input.DealId, nameof(input.DealId)),
@@ -83,8 +88,16 @@ public class NoteActions
             PinnedToDealFlag = input.PinnedToDeal ?? false,
             PinnedToPersonFlag = input.PinnedToPerson ?? false,
             PinnedToOrganizationFlag = input.PinnedToOrganization ?? false,
-        });
-        return new(response);
+        };
+        
+        var request = new PipedriveRestRequest($"v1/notes/{note.NoteId}", Method.Put, creds)
+            .WithJsonBody(payload, new()
+            {
+                DefaultValueHandling = DefaultValueHandling.Ignore
+            });
+
+        var response = await client.ExecuteWithErrorHandling<JsonResponse<Note>>(request);
+        return new(response.Data);
     }
     
     [Action("Delete note", Description = "Delete specific note")]

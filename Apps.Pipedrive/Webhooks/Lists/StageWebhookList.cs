@@ -17,10 +17,6 @@ public class StageWebhookList : WebhookList
     public Task<WebhookResponse<StageDto>> OnStageDeleted(WebhookRequest webhookRequest)
         => HandleWebhookRequest<Stage, StageDto>(webhookRequest, x => new(x));
 
-    [Webhook("On stage merged", typeof(StageMergedHandler), Description = "On specific stage merged")]
-    public Task<WebhookResponse<StageDto>> OnStageMerged(WebhookRequest webhookRequest)
-        => HandleWebhookRequest<Stage, StageDto>(webhookRequest, x => new(x));
-
     [Webhook("On stage updated", typeof(StageUpdatedHandler), Description = "On specific stage updated")]
     public Task<WebhookResponse<StageDto>> OnStageUpdated(WebhookRequest webhookRequest)
         => HandleWebhookRequest<Stage, StageDto>(webhookRequest, x => new(x));
