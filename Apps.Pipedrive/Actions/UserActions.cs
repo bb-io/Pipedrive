@@ -43,9 +43,15 @@ public class UserActions
         var client = new PipedriveApiClient(creds);
 
         var request = new NewUser(input.Name, input.Email, input.IsActive ?? true);
-        var response = await client.User.Create(request);
-        
-        return new(response);
+        try
+        {
+            var response = await client.User.Create(request);
+            return new(response);
+        }
+        catch (ForbiddenException ex)
+        {
+            throw new($"You have no access to perform this action: {ex.Message}");
+        }
     }    
     
     [Action("Deactivate user", Description = "Deactivate specific user")]
