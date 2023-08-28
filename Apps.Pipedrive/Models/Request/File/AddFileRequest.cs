@@ -6,11 +6,7 @@ namespace Apps.Pipedrive.Models.Request.File;
 
 public class AddFileRequest
 {
-    [Display("File name")] public string FileName { get; set; }
-
-    [Display("File content")] public byte[] FileContent { get; set; }
-
-    [Display("Content type")] public string ContentType { get; set; }
+    public Blackbird.Applications.Sdk.Common.Files.File File { get; set; }
 
     [Display("Deal")]
     [DataSource(typeof(DealDataHandler))]

@@ -53,7 +53,13 @@ public class FileActions
         var request = new PipedriveRestRequest(endpoint, Method.Get, creds);
 
         var response = await client.ExecuteWithErrorHandling(request);
-        return new(response.RawBytes);
+        var filename = response.ContentHeaders.First(h => h.Name == "Content-Disposition").Value.ToString().Split('"')[1];
+
+        return new(new Blackbird.Applications.Sdk.Common.Files.File(response.RawBytes)
+        {
+            Name = filename,
+            ContentType = response.ContentType
+        });
     }
 
     [Action("Add file", Description = "Upload a new file")]
@@ -63,7 +69,7 @@ public class FileActions
     {
         var client = new PipedriveApiClient(creds);
 
-        var request = new NewFile(new(input.FileName, input.FileContent, input.ContentType))
+        var request = new NewFile(new(input.File.Name, input.File.Bytes, input.File.ContentType))
         {
             DealId = LongParser.Parse(input.DealId, nameof(input.DealId)),
             PersonId = LongParser.Parse(input.PersonId, nameof(input.PersonId)),
