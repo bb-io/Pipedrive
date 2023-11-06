@@ -1,21 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-		<Product>Pipedrive</Product>
-		<Description>Sales customer relationship management tool</Description>
-		<Version>1.0.0</Version>
-		<AssemblyName>Apps.Pipedrive</AssemblyName>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.2.0-alpha4" />
-      <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.3" />
-      <PackageReference Include="Pipedrive.net" Version="0.5.19" />
-    </ItemGroup>
-	<ItemGroup>
-		<EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.png" />
-	</ItemGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Product>Pipedrive</Product>
+    <Description>Sales customer relationship management tool</Description>
+    <Version>1.0.1</Version>
+    <AssemblyName>Apps.Pipedrive</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.2.0-alpha4" />
+    <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.3" />
+    <PackageReference Include="Pipedrive.net" Version="0.5.19" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.png" />
+  </ItemGroup>
 </Project>
