@@ -1,4 +1,6 @@
 ﻿
+using Apps.Pipedrive.Actions;
+using Apps.Pipedrive.Models.Request.Activity;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Connections;
 using RestSharp;
@@ -10,7 +12,24 @@ namespace Apps.Pipedrive.Connections
         public async ValueTask<ConnectionValidationResponse> ValidateConnection(
        IEnumerable<AuthenticationCredentialsProvider> authProviders, CancellationToken cancellationToken)
         {
-            return new() { IsValid = true };
+            var actions = new ActivityActions();
+            try
+            {
+                await actions.ListActivities(authProviders, new ListActivitiesRequest { });
+                return new ConnectionValidationResponse
+                {
+                    IsValid = true,
+                    Message = "Success"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ConnectionValidationResponse
+                {
+                    IsValid = false,
+                    Message = ex.Message
+                };
+            }
         }
     }
 }
