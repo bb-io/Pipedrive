@@ -1,12 +1,13 @@
 ﻿using Apps.Pipedrive.DataSourceHandlers;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dynamic;
+using Blackbird.Applications.Sdk.Common.Files;
 
 namespace Apps.Pipedrive.Models.Request.File;
 
 public class AddFileRequest
 {
-    public Blackbird.Applications.Sdk.Common.Files.File File { get; set; }
+    public FileReference File { get; set; }
 
     [Display("Deal")]
     [DataSource(typeof(DealDataHandler))]
