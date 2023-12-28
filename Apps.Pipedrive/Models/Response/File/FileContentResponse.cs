@@ -1,3 +1,5 @@
-﻿namespace Apps.Pipedrive.Models.Response.File;
+﻿using Blackbird.Applications.Sdk.Common.Files;
 
-public record FileContentResponse(Blackbird.Applications.Sdk.Common.Files.File File);
+namespace Apps.Pipedrive.Models.Response.File;
+
+public record FileContentResponse(FileReference File);

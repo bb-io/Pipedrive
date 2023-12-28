@@ -6,7 +6,9 @@ using Apps.Pipedrive.RestSharp;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Authentication;
+using Blackbird.Applications.Sdk.Utils.Extensions.Files;
 using Blackbird.Applications.Sdk.Utils.Parsers;
+using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Pipedrive;
 using RestSharp;
 
@@ -15,6 +17,13 @@ namespace Apps.Pipedrive.Actions;
 [ActionList]
 public class FileActions
 {
+    private readonly IFileManagementClient _fileManagementClient;
+
+    public FileActions(IFileManagementClient fileManagementClient)
+    {
+        _fileManagementClient = fileManagementClient;
+    }
+
     [Action("List files", Description = "Lists all files")]
     public async Task<ListFilesResponse> ListFiles(IEnumerable<AuthenticationCredentialsProvider> creds)
     {
@@ -55,11 +64,9 @@ public class FileActions
         var response = await client.ExecuteWithErrorHandling(request);
         var filename = response.ContentHeaders.First(h => h.Name == "Content-Disposition").Value.ToString().Split('"')[1];
 
-        return new(new Blackbird.Applications.Sdk.Common.Files.File(response.RawBytes)
-        {
-            Name = filename,
-            ContentType = response.ContentType
-        });
+        using var stream = new MemoryStream(response.RawBytes);
+        var fileResponse = await _fileManagementClient.UploadAsync(stream, response.ContentType, filename);
+        return new(fileResponse);
     }
 
     [Action("Add file", Description = "Upload a new file")]
@@ -69,7 +76,8 @@ public class FileActions
     {
         var client = new PipedriveApiClient(creds);
 
-        var request = new NewFile(new(input.File.Name, input.File.Bytes, input.File.ContentType))
+        var fileBytes = _fileManagementClient.DownloadAsync(input.File).Result.GetByteData().Result;
+        var request = new NewFile(new(input.File.Name, fileBytes, input.File.ContentType))
         {
             DealId = LongParser.Parse(input.DealId, nameof(input.DealId)),
             PersonId = LongParser.Parse(input.PersonId, nameof(input.PersonId)),
