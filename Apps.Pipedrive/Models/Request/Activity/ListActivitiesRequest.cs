@@ -1,12 +1,12 @@
 ﻿using Apps.Pipedrive.DataSourceHandlers.EnumDataHandlers;
 using Blackbird.Applications.Sdk.Common;
-using Blackbird.Applications.Sdk.Common.Dynamic;
+using Blackbird.Applications.Sdk.Common.Dictionaries;
 
 namespace Apps.Pipedrive.Models.Request.Activity;
 
 public class ListActivitiesRequest
 {
-    [DataSource(typeof(ActivityTypeDataHandler))]
+    [StaticDataSource(typeof(ActivityTypeDataHandler))]
     public string? Type { get; set; }
     
     [Display("Start date")]

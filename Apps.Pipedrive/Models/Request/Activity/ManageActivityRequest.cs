@@ -1,6 +1,7 @@
 ﻿using Apps.Pipedrive.DataSourceHandlers;
 using Apps.Pipedrive.DataSourceHandlers.EnumDataHandlers;
 using Blackbird.Applications.Sdk.Common;
+using Blackbird.Applications.Sdk.Common.Dictionaries;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 
 namespace Apps.Pipedrive.Models.Request.Activity;
@@ -12,7 +13,7 @@ public class ManageActivityRequest
     [Display("Is done")]
     public bool? IsDone { get; set; }
     
-    [DataSource(typeof(ActivityTypeDataHandler))]
+    [StaticDataSource(typeof(ActivityTypeDataHandler))]
     public string? Type { get; set; }
 
     [Display("Due date")]

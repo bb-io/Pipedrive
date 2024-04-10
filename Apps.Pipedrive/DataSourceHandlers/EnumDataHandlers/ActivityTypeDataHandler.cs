@@ -1,10 +1,10 @@
-﻿using Blackbird.Applications.Sdk.Utils.Sdk.DataSourceHandlers;
+﻿using Blackbird.Applications.Sdk.Common.Dictionaries;
 
 namespace Apps.Pipedrive.DataSourceHandlers.EnumDataHandlers;
 
-public class ActivityTypeDataHandler : EnumDataHandler
+public class ActivityTypeDataHandler : IStaticDataSourceHandler
 {
-    protected override Dictionary<string, string> EnumValues => new()
+    public Dictionary<string, string> GetData() => new()
     {
         { "call", "Call" },
         { "meeting", "Meeting" },
