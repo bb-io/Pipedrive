@@ -26,7 +26,7 @@ public class DealActions
             client.Deal.GetAll(new()
             {
                 StageId = LongParser.Parse(input.StageId, nameof(input.StageId)),
-                Status = EnumParser.Parse<DealStatus>(input.Status, nameof(input.Status), EnumValues.DealStauts),
+                Status = EnumParser.Parse<DealStatus>(input.Status, nameof(input.Status)),
                 StartPage = offset,
                 PageSize = limit
             }));
@@ -92,7 +92,7 @@ public class DealActions
             OrgId = LongParser.Parse(input.OrgId, nameof(input.OrgId)),
             PersonId = LongParser.Parse(input.PersonId, nameof(input.PersonId)),
             StageId = LongParser.Parse(input.StageId, nameof(input.StageId)),
-            Status = EnumParser.Parse<DealStatus>(input.Status, nameof(input.Status), EnumValues.DealStauts) ??
+            Status = EnumParser.Parse<DealStatus>(input.Status, nameof(input.Status)) ??
                      DealStatus.open,
             Probability = input.Probability ?? default,
             LostReason = input.LostReason,
@@ -123,7 +123,7 @@ public class DealActions
             OrgId = LongParser.Parse(input.OrgId, nameof(input.OrgId)),
             PersonId = LongParser.Parse(input.PersonId, nameof(input.PersonId)),
             StageId = LongParser.Parse(input.StageId, nameof(input.StageId)),
-            Status = EnumParser.Parse<DealStatus>(input.Status, nameof(input.Status), EnumValues.DealStauts) ??
+            Status = EnumParser.Parse<DealStatus>(input.Status, nameof(input.Status)) ??
                      DealStatus.open,
             Probability = input.Probability ?? default,
             LostReason = input.LostReason,
