@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <Product>Pipedrive</Product>
     <Description>Sales customer relationship management tool</Description>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <AssemblyName>Apps.Pipedrive</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
