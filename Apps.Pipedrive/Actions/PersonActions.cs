@@ -10,7 +10,7 @@ using Pipedrive;
 
 namespace Apps.Pipedrive.Actions;
 
-[ActionList]
+[ActionList("Person")]
 public class PersonActions
 {
     [Action("List people", Description = "Lists all people")]

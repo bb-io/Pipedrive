@@ -10,7 +10,7 @@ using Pipedrive;
 
 namespace Apps.Pipedrive.Actions;
 
-[ActionList]
+[ActionList("Organization")]
 public class OrganizationActions
 {
     [Action("List organizations", Description = "Lists all organizations")]
