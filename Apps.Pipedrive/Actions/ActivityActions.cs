@@ -11,7 +11,7 @@ using Pipedrive;
 
 namespace Apps.Pipedrive.Actions;
 
-[ActionList]
+[ActionList("Activity")]
 public class ActivityActions
 {
     [Action("List activities", Description = "List all activities")]

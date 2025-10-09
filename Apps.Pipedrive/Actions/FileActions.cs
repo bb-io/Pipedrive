@@ -14,7 +14,7 @@ using RestSharp;
 
 namespace Apps.Pipedrive.Actions;
 
-[ActionList]
+[ActionList("File")]
 public class FileActions
 {
     private readonly IFileManagementClient _fileManagementClient;

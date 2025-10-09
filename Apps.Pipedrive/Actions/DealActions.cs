@@ -13,7 +13,7 @@ using Pipedrive;
 
 namespace Apps.Pipedrive.Actions;
 
-[ActionList]
+[ActionList("Deal")]
 public class DealActions
 {
     [Action("List deals", Description = "List all deals")]

@@ -9,7 +9,7 @@ using Blackbird.Applications.Sdk.Utils.Parsers;
 
 namespace Apps.Pipedrive.Actions;
 
-[ActionList]
+[ActionList("Stage")]
 public class StageActions
 {
     [Action("List stages", Description = "Lists all stages")]

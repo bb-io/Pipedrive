@@ -14,7 +14,7 @@ using RestSharp;
 
 namespace Apps.Pipedrive.Actions;
 
-[ActionList]
+[ActionList("Note")]
 public class NoteActions
 {
     [Action("List notes", Description = "Lists all notes")]
