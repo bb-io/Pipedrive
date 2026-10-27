@@ -5,16 +5,17 @@
     <Nullable>enable</Nullable>
     <Product>Pipedrive</Product>
     <Description>Sales customer relationship management tool</Description>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <AssemblyName>Apps.Pipedrive</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Blackbird.Applications.SDK.Blueprints" Version="1.0.0-rc.10308" />
-    <PackageReference Include="Blackbird.Applications.SDK.Extensions.FileManagement" Version="1.0.1" />
-    <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.16" />
+    <PackageReference Include="Blackbird.Applications.SDK.Blueprints" Version="1.0.2" />
+    <PackageReference Include="Blackbird.Applications.SDK.Extensions.FileManagement" Version="1.1.0" />
+    <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.26" />
     <PackageReference Include="Pipedrive.net" Version="0.5.19" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.png" />
+    <EmbeddedResource CopyToOutputDirectory="Always" Include="..\README.md"/>
   </ItemGroup>
 </Project>
