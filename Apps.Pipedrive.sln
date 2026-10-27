@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apps.Pipedrive", "Apps.Pipedrive\Apps.Pipedrive.csproj", "{9780AAD6-EB7E-4FEF-A44F-F85FB683CEE8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Pipedrive", "Tests.Pipedrive\Tests.Pipedrive.csproj", "{5D6B7789-4761-42CA-A696-8EF027587C3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{9780AAD6-EB7E-4FEF-A44F-F85FB683CEE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9780AAD6-EB7E-4FEF-A44F-F85FB683CEE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9780AAD6-EB7E-4FEF-A44F-F85FB683CEE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D6B7789-4761-42CA-A696-8EF027587C3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D6B7789-4761-42CA-A696-8EF027587C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D6B7789-4761-42CA-A696-8EF027587C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D6B7789-4761-42CA-A696-8EF027587C3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
