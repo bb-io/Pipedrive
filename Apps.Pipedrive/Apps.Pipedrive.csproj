@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <Product>Pipedrive</Product>
     <Description>Sales customer relationship management tool</Description>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
     <AssemblyName>Apps.Pipedrive</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
@@ -16,6 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.png" />
-    <EmbeddedResource CopyToOutputDirectory="Always" Include="..\README.md"/>
+    <EmbeddedResource Include="..\README.md" Link="README.md" CopyToOutputDirectory="Always" />
   </ItemGroup>
 </Project>
